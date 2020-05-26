@@ -163,8 +163,9 @@ def generate_frame():
     # '\x01\x00'                 #1 Authentication Key Managment Suite (line below)
     # '\x00\x0f\xac\x02'         #Pre-Shared Key
     # '\x00\x00'))               #RSN Capabilities (no extra capabilities)
+    payload = struct.pack('b', FRAME_VS_TYPE)
 
-    payload = struct.pack('>bbb', FRAME_PROTOCOL_VERSION_TYPE, FRAME_TLV_LENGTH[FRAME_PROTOCOL_VERSION_TYPE], FRAME_VS_TYPE)
+    payload += struct.pack('>bbb', FRAME_PROTOCOL_VERSION_TYPE, FRAME_TLV_LENGTH[FRAME_PROTOCOL_VERSION_TYPE], FRAME_VS_TYPE)
 
     payload += struct.pack('>bb', FRAME_ID_FR_TYPE, FRAME_TLV_LENGTH[FRAME_ID_FR_TYPE]) + bytes("ILLEGAL_DRONE_APPELEZ_POLICE17", 'utf-8')
 

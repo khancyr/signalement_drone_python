@@ -62,9 +62,9 @@ def findSSID(pkt):
         frame = pkt.getlayer(Dot11EltVendorSpecific)
         if frame.oui == 0x6A5C35:
             #print("ID %d, OUI %s, len %d" % ((frame.ID), hex(frame.oui), (frame.len)))
-            # start at 5 because frame first 4 bytes are OUI, frame.info containt the OUI but not the last part of the payload...
+            # start at 6 because frame first 5 bytes are OUI+VSTYPE, frame.info containt the OUI but not the last part of the payload...
             count = 0
-            payload = frame.original[5:]
+            payload = frame.original[6:]
             while count < len(payload):
                 V = ''
                 T, L = struct.unpack_from('>bb', payload, count)
